@@ -8,6 +8,7 @@ A Base MiniApp for creators to generate AI-powered video ideas, scripts, and sho
 - **Script & Talking Point Synthesis**: Create concise scripts and key talking points structured for short-form video formats
 - **User Profile Management**: Track credits and subscription tiers
 - **Mobile-First Design**: Optimized for Base App and mobile experiences
+- **Farcaster Integration**: Native Farcaster frame support
 
 ## Getting Started
 
@@ -23,8 +24,7 @@ A Base MiniApp for creators to generate AI-powered video ideas, scripts, and sho
    ```
 
 4. Add your API keys to `.env.local`:
-   - `NEXT_PUBLIC_MINIKIT_API_KEY`: Your MiniKit API key
-   - `NEXT_PUBLIC_ONCHAINKIT_API_KEY`: Your OnchainKit API key  
+   - `NEXT_PUBLIC_ONCHAINKIT_API_KEY`: Your OnchainKit API key
    - `OPENAI_API_KEY`: Your OpenAI API key
 
 5. Run the development server:
@@ -36,20 +36,142 @@ A Base MiniApp for creators to generate AI-powered video ideas, scripts, and sho
 
 ## Tech Stack
 
-- **Framework**: Next.js 15 with App Router
-- **Styling**: Tailwind CSS
-- **Blockchain**: Base (via MiniKit and OnchainKit)
-- **AI**: OpenAI GPT-4 via OpenRouter
+- **Framework**: Next.js 14 with App Router
+- **Styling**: Tailwind CSS with custom design system
+- **Blockchain**: Base (via OnchainKit)
+- **Social**: Farcaster Frame SDK
+- **AI**: OpenAI GPT-4
 - **TypeScript**: Full type safety
 
 ## Project Structure
 
 ```
 ├── app/                 # Next.js App Router pages
-├── components/          # Reusable UI components
-├── lib/                # Utilities and types
-├── public/             # Static assets
+│   ├── api/            # API routes
+│   │   ├── users/      # User management
+│   │   ├── idea-sessions/  # Idea generation
+│   │   ├── scripts/    # Script generation
+│   │   └── clips/      # Clip management
+├── components/         # Reusable UI components
+├── lib/               # Utilities, types, and database
+├── public/            # Static assets and manifest
 └── README.md
+```
+
+## API Documentation
+
+### Users API
+
+#### POST `/api/users`
+Create or retrieve a user profile.
+
+**Request Body:**
+```json
+{
+  "userId": "string",
+  "farcasterId": "string (optional)",
+  "credits": 10,
+  "subscriptionTier": "free"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "userId": "string",
+    "farcasterId": "string",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "credits": 10,
+    "subscriptionTier": "free"
+  }
+}
+```
+
+#### GET `/api/users?userId={userId}`
+Retrieve user profile by userId.
+
+### Idea Sessions API
+
+#### POST `/api/idea-sessions`
+Generate video ideas using AI.
+
+**Request Body:**
+```json
+{
+  "userId": "string",
+  "prompt": "string"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "sessionId": "string",
+    "userId": "string",
+    "prompt": "string",
+    "generatedIdeas": [...],
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### Scripts API
+
+#### POST `/api/scripts`
+Generate a video script from a selected idea.
+
+**Request Body:**
+```json
+{
+  "userId": "string",
+  "ideaId": "string",
+  "idea": {
+    "id": "string",
+    "title": "string",
+    "description": "string",
+    "platform": "tiktok|instagram|youtube|twitter",
+    "estimatedDuration": "string",
+    "tags": ["string"],
+    "engagementPotential": "low|medium|high"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "scriptId": "string",
+    "userId": "string",
+    "ideaId": "string",
+    "content": "string",
+    "platformFormat": "string",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "talkingPoints": ["string"],
+    "hooks": ["string"],
+    "callToAction": "string"
+  }
+}
+```
+
+### Clips API
+
+#### POST `/api/clips`
+Create a new clip record (for future clip generation feature).
+
+**Request Body:**
+```json
+{
+  "userId": "string",
+  "originalVideoUrl": "string",
+  "clipUrl": "string",
+  "platform": "string"
+}
 ```
 
 ## Business Model
@@ -57,6 +179,16 @@ A Base MiniApp for creators to generate AI-powered video ideas, scripts, and sho
 - **Micro-transactions**: Pay-per-clip generation ($0.10 per clip)
 - **Subscription**: $5/month for 50 clips, $15/month for unlimited clips
 - **Free tier**: Limited features with watermarked output
+
+## Design System
+
+The app uses a comprehensive design system with:
+
+- **Colors**: Primary (purple), Secondary (gray), Accent (blue)
+- **Typography**: Responsive text scales with proper hierarchy
+- **Spacing**: Consistent spacing tokens (4px base grid)
+- **Components**: Reusable UI components with variants
+- **Motion**: Smooth animations with cubic-bezier easing
 
 ## Contributing
 

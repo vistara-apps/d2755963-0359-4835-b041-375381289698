@@ -18,11 +18,28 @@ export function IdeaGenerator({ onIdeaSelect }: IdeaGeneratorProps) {
 
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
-    
+
     setIsGenerating(true);
     try {
-      const generatedIdeas = await generateVideoIdeas(prompt);
-      setIdeas(generatedIdeas);
+      const response = await fetch('/api/idea-sessions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: 'current-user', // In a real app, get from auth context
+          prompt: prompt.trim(),
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setIdeas(result.data.generatedIdeas);
+      } else {
+        console.error('Error generating ideas:', result.error);
+        // Show error toast in real app
+      }
     } catch (error) {
       console.error('Error generating ideas:', error);
       // Show error toast in real app

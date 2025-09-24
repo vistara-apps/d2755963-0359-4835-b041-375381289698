@@ -1,9 +1,15 @@
+'use client';
+
+import { useState } from 'react';
 import { AppShell } from '@/components/AppShell';
 import { IdeaGenerator } from '@/components/IdeaGenerator';
 import { ScriptGenerator } from '@/components/ScriptGenerator';
 import { UserProfile } from '@/components/UserProfile';
+import { VideoIdea } from '@/lib/types';
 
 export default function HomePage() {
+  const [selectedIdea, setSelectedIdea] = useState<VideoIdea | null>(null);
+
   return (
     <AppShell>
       <div className="container py-6 space-y-6">
@@ -17,10 +23,10 @@ export default function HomePage() {
         </header>
 
         <UserProfile />
-        
+
         <div className="space-y-6">
-          <IdeaGenerator />
-          <ScriptGenerator />
+          <IdeaGenerator onIdeaSelect={setSelectedIdea} />
+          <ScriptGenerator selectedIdea={selectedIdea} />
         </div>
       </div>
     </AppShell>
