@@ -1,0 +1,30 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "ContentSpark AI",
+    "subtitle": "Built with Zara",
+    "description": "ContentSpark AI is a Base Mini App built with Zara.",
+    "iconUrl": "https://0co.to/images/zara-2.png",
+    "homeUrl": "https://d275596303594835b041375381289698-el6n.vercel.app",
+    "splashImageUrl": "https://d275596303594835b041375381289698-el6n.vercel.app/splash.png",
+    "splashBackgroundColor": "#000000",
+    "heroImageUrl": "https://d275596303594835b041375381289698-el6n.vercel.app/image.png",
+    "tagline": "ContentSpark AI",
+    "screenshotUrls": [
+      "https://d275596303594835b041375381289698-el6n.vercel.app/screenshot.png",
+      "https://d275596303594835b041375381289698-el6n.vercel.app/screenshot.png"
+    ],
+    "primaryCategory": "social",
+    "tags": [
+      "base",
+      "miniapp",
+      "onchainkit"
+    ],
+    "webhookUrl": "https://d275596303594835b041375381289698-el6n.vercel.app/api/webhook"
+  }
+}
