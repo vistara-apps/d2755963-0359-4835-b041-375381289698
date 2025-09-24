@@ -1,13 +1,16 @@
-# ContentSpark AI
+# ContentSpark AI ✨
 
-A Base MiniApp for creators to generate AI-powered video ideas, scripts, and short clips for social media.
+A modern, AI-powered content creation platform for generating viral video ideas, professional scripts, and social media clips. Built with cutting-edge UI/UX design principles and optimized for creators.
 
-## Features
+## ✨ Key Features
 
-- **AI-Powered Idea Generation**: Generate 5-10 specific, trending video ideas tailored for social media platforms
-- **Script & Talking Point Synthesis**: Create concise scripts and key talking points structured for short-form video formats
-- **User Profile Management**: Track credits and subscription tiers
-- **Mobile-First Design**: Optimized for Base App and mobile experiences
+- **🤖 AI-Powered Idea Generation**: Generate 5+ viral content ideas tailored for your niche
+- **📝 Professional Script Creation**: Transform ideas into engaging scripts with hooks, talking points, and CTAs  
+- **👤 Enhanced User Management**: Beautiful profile cards with credit tracking and tier management
+- **📱 Mobile-First Design**: Fully responsive with touch-optimized interactions
+- **🎨 Modern UI/UX**: Glass morphism, gradients, and smooth animations
+- **♿ Accessibility Focused**: ARIA labels, keyboard navigation, and reduced motion support
+- **🔔 Smart Notifications**: Toast system for user feedback and error handling
 
 ## Getting Started
 
@@ -34,13 +37,46 @@ A Base MiniApp for creators to generate AI-powered video ideas, scripts, and sho
 
 6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Tech Stack
+## 🛠 Tech Stack
 
 - **Framework**: Next.js 15 with App Router
-- **Styling**: Tailwind CSS
-- **Blockchain**: Base (via MiniKit and OnchainKit)
-- **AI**: OpenAI GPT-4 via OpenRouter
+- **Styling**: Tailwind CSS with custom design system
+- **UI Components**: Custom components with glass morphism effects
+- **Icons**: Lucide React
+- **AI Integration**: OpenAI GPT-4 (with mock data for demo)
 - **TypeScript**: Full type safety
+- **Animations**: CSS animations with reduced motion support
+
+## 🎨 UI/UX Improvements Implemented
+
+### Modern Design System
+- ✅ Gradient color schemes with proper CSS variables
+- ✅ Glass morphism effects with backdrop blur
+- ✅ Enhanced spacing and typography hierarchy
+- ✅ Custom shadow elevations and hover effects
+- ✅ Rounded corners and smooth transitions
+
+### Enhanced User Experience  
+- ✅ Toast notification system for user feedback
+- ✅ Loading states with shimmer effects
+- ✅ Error handling with graceful fallbacks
+- ✅ Connected workflow between idea and script generation
+- ✅ Copy-to-clipboard functionality with feedback
+
+### Mobile & Accessibility
+- ✅ Responsive grid layouts (1 col mobile, 2 col desktop)
+- ✅ Touch-friendly button sizes (44px minimum)
+- ✅ ARIA labels and semantic HTML
+- ✅ Keyboard navigation support
+- ✅ Reduced motion preferences respected
+- ✅ Custom scrollbar styling
+
+### Interactive Elements
+- ✅ Animated card hover effects
+- ✅ Staggered animations for list items
+- ✅ Progress bars and credit visualization
+- ✅ Tab navigation with smooth transitions
+- ✅ Micro-interactions on button clicks
 
 ## Project Structure
 

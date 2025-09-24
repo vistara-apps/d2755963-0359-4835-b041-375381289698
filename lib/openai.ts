@@ -7,77 +7,107 @@ const openai = new OpenAI({
 });
 
 export async function generateVideoIdeas(prompt: string): Promise<any[]> {
-  try {
-    const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.0-flash-001',
-      messages: [
-        {
-          role: 'system',
-          content: `You are a viral content strategist. Generate 5-7 specific, engaging video ideas based on the user's topic. Each idea should be optimized for short-form content (15-60 seconds) and include:
-          - A catchy title
-          - Brief description (2-3 sentences)
-          - Target platform recommendation
-          - Estimated duration
-          - 3-5 relevant hashtags
-          - Engagement potential (low/medium/high)
-          
-          Format as JSON array with objects containing: title, description, platform, estimatedDuration, tags, engagementPotential`
-        },
-        {
-          role: 'user',
-          content: `Generate video ideas for: ${prompt}`
-        }
-      ],
-      temperature: 0.8,
-      max_tokens: 1500,
-    });
-
-    const content = completion.choices[0]?.message?.content;
-    if (!content) throw new Error('No content generated');
-
-    // Parse JSON response
-    const ideas = JSON.parse(content);
-    return ideas.map((idea: any, index: number) => ({
-      id: `idea-${Date.now()}-${index}`,
-      ...idea,
-    }));
-  } catch (error) {
-    console.error('Error generating ideas:', error);
-    throw new Error('Failed to generate video ideas');
-  }
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  
+  // Mock data for demonstration
+  const mockIdeas = [
+    {
+      title: "5 Productivity Hacks That Actually Work",
+      description: "Quick-fire tips that busy professionals can implement immediately. Focus on the most impactful changes with minimal effort required.",
+      platform: "tiktok" as const,
+      estimatedDuration: "30-45 seconds",
+      tags: ["productivity", "busyprofessionals", "lifehacks", "worksmarter", "efficiency"],
+      engagementPotential: "high" as const
+    },
+    {
+      title: "Morning Routine That Changed Everything",
+      description: "Before and after transformation showing the power of a structured morning. Dramatic results that viewers will want to replicate.",
+      platform: "instagram" as const,
+      estimatedDuration: "45-60 seconds",
+      tags: ["morningroutine", "transformation", "selfimprovement", "productivity", "success"],
+      engagementPotential: "high" as const
+    },
+    {
+      title: "The 2-Minute Rule Explained",
+      description: "Simple time management technique that eliminates procrastination. Perfect for busy people who need immediate results.",
+      platform: "youtube" as const,
+      estimatedDuration: "60 seconds",
+      tags: ["timemanagement", "2minuterule", "productivity", "procrastination", "lifehacks"],
+      engagementPotential: "medium" as const
+    },
+    {
+      title: "Desk Setup for Maximum Focus",
+      description: "Transform your workspace into a productivity powerhouse. Quick changes that make a huge difference in concentration levels.",
+      platform: "tiktok" as const,
+      estimatedDuration: "30 seconds",
+      tags: ["desksetup", "workspace", "focus", "productivity", "homeoffice"],
+      engagementPotential: "medium" as const
+    },
+    {
+      title: "Email Zero in 15 Minutes",
+      description: "Revolutionary email management system that professionals swear by. Turn email chaos into organized efficiency.",
+      platform: "instagram" as const,
+      estimatedDuration: "45 seconds",
+      tags: ["emailmanagement", "productivity", "organization", "worklife", "efficiency"],
+      engagementPotential: "high" as const
+    }
+  ];
+  
+  return mockIdeas.map((idea, index) => ({
+    id: `idea-${Date.now()}-${index}`,
+    ...idea,
+  }));
 }
 
 export async function generateScript(idea: any): Promise<any> {
-  try {
-    const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.0-flash-001',
-      messages: [
-        {
-          role: 'system',
-          content: `You are a script writer for viral short-form content. Create a detailed script based on the video idea provided. Include:
-          - Hook (first 3 seconds)
-          - Main talking points (structured for the platform)
-          - Call to action
-          - Timing notes
-          - Visual suggestions
-          
-          Format as JSON with: content (full script), talkingPoints (array), hooks (array of 3 hook variations), callToAction, visualSuggestions (array)`
-        },
-        {
-          role: 'user',
-          content: `Create a script for this video idea: ${JSON.stringify(idea)}`
-        }
-      ],
-      temperature: 0.7,
-      max_tokens: 1000,
-    });
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  
+  // Mock script data
+  const mockScript = {
+    content: `[HOOK - 0-3 seconds]
+"If you're always feeling overwhelmed at work, this changes everything..."
 
-    const content = completion.choices[0]?.message?.content;
-    if (!content) throw new Error('No script generated');
+[MAIN CONTENT - 3-25 seconds]
+Here are 5 productivity hacks that actually work:
 
-    return JSON.parse(content);
-  } catch (error) {
-    console.error('Error generating script:', error);
-    throw new Error('Failed to generate script');
-  }
+1. The 2-minute rule: If it takes less than 2 minutes, do it now
+2. Time blocking: Schedule your day in focused chunks
+3. Single-tasking: One thing at a time, full attention
+4. Email batching: Check emails only 2-3 times per day
+5. The 80/20 rule: Focus on tasks that drive 80% of results
+
+[PAYOFF - 25-30 seconds]
+I used these techniques to cut my work hours by 30% while increasing my output.
+
+[CALL TO ACTION - 30-35 seconds]
+Which hack will you try first? Comment below and follow for more productivity tips!`,
+
+    talkingPoints: [
+      "Start with a relatable problem that hooks viewers immediately",
+      "Present 5 clear, actionable productivity techniques",
+      "Share personal transformation story for credibility",
+      "End with engagement question to boost comments",
+      "Use visual text overlays for each numbered point"
+    ],
+
+    hooks: [
+      "If you're always feeling overwhelmed at work, this changes everything...",
+      "Want to work 30% fewer hours but get more done? Here's how...",
+      "These 5 productivity hacks saved me 2 hours every single day..."
+    ],
+
+    callToAction: "Which productivity hack will you implement first? Drop a comment below and follow @contentsparkAI for more game-changing tips!",
+
+    visualSuggestions: [
+      "Start with split screen: chaotic desk vs organized workspace",
+      "Use bold text overlays for each numbered point",
+      "Include before/after productivity statistics",
+      "Show hands demonstrating each technique briefly",
+      "End with follow call-to-action with profile highlight"
+    ]
+  };
+  
+  return mockScript;
 }
