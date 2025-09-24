@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useMiniKit } from '@coinbase/minikit';
+import { useFrame } from '@farcaster/frame-sdk';
 import { User, CreditCard, Settings } from 'lucide-react';
 import { User as UserType } from '@/lib/types';
 
 export function UserProfile() {
-  const { context } = useMiniKit();
+  const { context } = useFrame();
   const [user, setUser] = useState<UserType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

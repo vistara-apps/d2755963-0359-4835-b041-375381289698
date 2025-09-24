@@ -17,19 +17,28 @@ export function ScriptGenerator({ selectedIdea }: ScriptGeneratorProps) {
 
   const handleGenerateScript = async () => {
     if (!selectedIdea) return;
-    
+
     setIsGenerating(true);
     try {
-      const generatedScript = await generateScript(selectedIdea);
-      const scriptData: Script = {
-        scriptId: `script-${Date.now()}`,
-        userId: 'current-user',
-        ideaId: selectedIdea.id,
-        platformFormat: selectedIdea.platform,
-        createdAt: new Date(),
-        ...generatedScript,
-      };
-      setScript(scriptData);
+      const response = await fetch('/api/scripts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: 'current-user', // In a real app, get from auth context
+          ideaId: selectedIdea.id,
+          idea: selectedIdea,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setScript(result.data);
+      } else {
+        console.error('Error generating script:', result.error);
+      }
     } catch (error) {
       console.error('Error generating script:', error);
     } finally {
