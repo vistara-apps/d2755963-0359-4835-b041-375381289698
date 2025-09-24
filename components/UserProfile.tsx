@@ -1,12 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useMiniKit } from '@coinbase/minikit';
 import { User, CreditCard, Settings } from 'lucide-react';
 import { User as UserType } from '@/lib/types';
 
 export function UserProfile() {
-  const { context } = useMiniKit();
   const [user, setUser] = useState<UserType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,10 +12,11 @@ export function UserProfile() {
     // Simulate user data loading
     const loadUser = async () => {
       try {
-        // In a real app, this would fetch from your API
+        // In a real Base Mini App, this would access user context from the client
+        // For now, we'll use mock data
         const userData: UserType = {
-          userId: context?.user?.fid?.toString() || 'guest',
-          farcasterId: context?.user?.fid?.toString(),
+          userId: 'demo-user',
+          farcasterId: 'demo-user',
           createdAt: new Date(),
           credits: 10, // Free tier starts with 10 credits
           subscriptionTier: 'free',
@@ -31,7 +30,7 @@ export function UserProfile() {
     };
 
     loadUser();
-  }, [context]);
+  }, []);
 
   if (isLoading) {
     return (
@@ -55,8 +54,8 @@ export function UserProfile() {
     );
   }
 
-  const displayName = context?.user?.displayName || 'Creator';
-  const username = context?.user?.username || 'guest';
+  const displayName = 'Demo Creator';
+  const username = 'demo-creator';
 
   return (
     <div className="card p-4">

@@ -15,8 +15,8 @@ export function AppShell({
 }: AppShellProps) {
   return (
     <div className={cn(
-      'min-h-screen bg-background',
-      variant === 'glass' && 'backdrop-blur-sm bg-background/80',
+      'min-h-screen bg-white',
+      variant === 'glass' && 'backdrop-blur-sm bg-white/80',
       className
     )}>
       <main className="relative">
